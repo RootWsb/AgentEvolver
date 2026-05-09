@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-page: #fafafa;
+  --bg-panel: #ffffff;
+  --bg-sidebar: #fafafa;
+  --bg-hover: #f4f4f5;
+  --bg-active: #f4f4f5;
+  --bg-input: #f4f4f5;
+  --bg-code: #1e1e2e;
+  --text-primary: #18181b;
+  --text-secondary: #71717a;
+  --text-tertiary: #a1a1aa;
+  --text-inverse: #ffffff;
+  --border-color: #e4e4e7;
+  --border-divider: #f4f4f5;
+  --accent-primary: #18181b;
+  --accent-link: #2563eb;
+  --msg-user-bg: #eff6ff;
+  --msg-user-border: #2563eb;
+  --msg-agent-bg: #ffffff;
+  --msg-agent-border: #7c4dff;
+  --msg-tool-bg: #f4f4f5;
+  --msg-tool-border: #a1a1aa;
+  --msg-approval-bg: #fff7ed;
+  --msg-approval-border: #f59e0b;
+  --status-running: #16a34a;
+  --status-stopped: #a1a1aa;
+  --status-error: #ef4444;
+  --status-pending: #d97706;
+  --status-waiting: #8b5cf6;
+}
+
+.dark {
+  --bg-page: #18181b;
+  --bg-panel: #27272a;
+  --bg-sidebar: #18181b;
+  --bg-hover: #3f3f46;
+  --bg-active: #3f3f46;
+  --bg-input: #3f3f46;
+  --bg-code: #11111b;
+  --text-primary: #d4d4d8;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
+  --text-inverse: #18181b;
+  --border-color: #3f3f46;
+  --border-divider: #27272a;
+  --accent-primary: #d4d4d8;
+  --accent-link: #60a5fa;
+  --msg-user-bg: #1e3a5f;
+  --msg-user-border: #3b82f6;
+  --msg-agent-bg: #27272a;
+  --msg-agent-border: #7c4dff;
+  --msg-tool-bg: #3f3f46;
+  --msg-tool-border: #525252;
+  --msg-approval-bg: #3d2a1a;
+  --msg-approval-border: #d97706;
+  --status-running: #34d399;
+  --status-stopped: #71717a;
+  --status-error: #f87171;
+  --status-pending: #fbbf24;
+  --status-waiting: #a78bfa;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: 'DM Sans', system-ui, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim-fade-in { animation: fadeIn 0.25s ease-out; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.status-pulse { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Markdown content */
+.md-content p { margin: 0.35em 0; }
+.md-content pre {
+  background: var(--bg-code);
+  color: #cdd6f4;
+  padding: 10px 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 6px 0;
+}
+.md-content code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  background: rgba(128, 128, 128, 0.12);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.md-content pre code { background: none; padding: 0; }
+.md-content ul, .md-content ol { margin: 4px 0; padding-left: 20px; }
+.md-content li { margin: 2px 0; }
+.md-content blockquote {
+  border-left: 3px solid var(--border-color);
+  padding-left: 10px;
+  margin: 6px 0;
+  color: var(--text-secondary);
+}
+.md-content h1, .md-content h2, .md-content h3 {
+  margin: 12px 0 6px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.md-content h1 { font-size: 18px; }
+.md-content h2 { font-size: 16px; }
+.md-content h3 { font-size: 14px; }
+.md-content a { color: var(--accent-link); text-decoration: none; }
+.md-content a:hover { text-decoration: underline; }
+.md-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0;
+  font-size: 12px;
+}
+.md-content th, .md-content td {
+  border: 1px solid var(--border-color);
+  padding: 6px 8px;
+  text-align: left;
+}
+.md-content th {
+  background: var(--bg-hover);
+  font-weight: 600;
+}
+
+/* line-clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

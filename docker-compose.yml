@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: evolver-proxy
+    ports:
+      - "30000:30000"
+    environment:
+      - EVOLVER_PROXY_HOST=0.0.0.0
+      - EVOLVER_PROXY_PORT=30000
+      - EVOLVER_CANDIDATE_DIR=/data/candidate
+      - EVOLVER_AUDIT_DIR=/data/audit
+      - EVOLVER_PRODUCTION_DIR=/data/production
+      - EVOLVER_UPSTREAM_BASE_URL=${EVOLVER_UPSTREAM_BASE_URL}
+      - EVOLVER_UPSTREAM_API_KEY=${EVOLVER_UPSTREAM_API_KEY}
+      - EVOLVER_UPSTREAM_MODEL=${EVOLVER_UPSTREAM_MODEL:-gpt-4o}
+    volumes:
+      - evolver_data:/data
+      - ./production:/data/production:ro
+    networks:
+      - evolver
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: evolver-dashboard
+    ports:
+      - "30001:30001"
+    environment:
+      - EVOLVER_DASHBOARD_HOST=0.0.0.0
+      - EVOLVER_DASHBOARD_PORT=30001
+      - EVOLVER_CANDIDATE_DIR=/data/candidate
+      - EVOLVER_AUDIT_DIR=/data/audit
+      - EVOLVER_PRODUCTION_DIR=/data/production
+    volumes:
+      - evolver_data:/data
+      - ./production:/data/production:rw
+    networks:
+      - evolver
+
+volumes:
+  evolver_data:
+
+networks:
+  evolver:
+    driver: bridge
